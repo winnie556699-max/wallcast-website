@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>關於我們 — 牆播 WallCast</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sun: #FF6B35;
+  --sky: #00B4D8;
+  --leaf: #2DC653;
+  --lemon: #FFD166;
+  --ink: #1B1F2A;
+  --soft: #F8F6F2;
+  --mid: #6B7280;
+  --white: #FFFFFF;
+  --radius: 16px;
+  --radius-sm: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans TC',sans-serif; background:var(--soft); color:var(--ink); overflow-x:hidden; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--soft); }
+::-webkit-scrollbar-thumb { background:#ddd; border-radius:99px; }
+
+/* ══ SHARED NAV (同首頁) ══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(248,246,242,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  padding:0 40px; height:68px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-icon { width:38px; height:38px; background:var(--sun); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; box-shadow:0 4px 12px rgba(255,107,53,0.35); flex-shrink:0; }
+.logo-text { font-family:'Nunito','Noto Sans TC',sans-serif; font-weight:900; font-size:1.3rem; color:var(--ink); letter-spacing:-0.02em; }
+.logo-text span { color:var(--sun); }
+.nav-links { display:flex; align-items:center; gap:4px; }
+.nav-link { padding:8px 16px; border-radius:99px; font-size:0.88rem; font-weight:500; color:var(--mid); text-decoration:none; transition:all .2s; border:none; background:none; cursor:pointer; font-family:'Noto Sans TC',sans-serif; }
+.nav-link:hover, .nav-link.active { background:rgba(0,0,0,0.05); color:var(--ink); }
+.nav-link.active { font-weight:700; color:var(--sun); }
+.nav-actions { display:flex; align-items:center; gap:10px; }
+.btn-login { padding:9px 20px; border:1.5px solid var(--ink); border-radius:99px; background:transparent; color:var(--ink); font-size:0.85rem; font-weight:700; cursor:pointer; transition:all .2s; font-family:'Noto Sans TC',sans-serif; }
+.btn-login:hover { background:var(--ink); color:white; }
+.btn-cta { padding:9px 22px; background:var(--sun); border:none; border-radius:99px; color:white; font-size:0.85rem; font-weight:700; cursor:pointer; transition:all .2s; box-shadow:0 4px 14px rgba(255,107,53,0.4); font-family:'Noto Sans TC',sans-serif; }
+.btn-cta:hover { background:#e55a28; transform:translateY(-1px); }
+
+/* ══ PAGE HERO ══ */
+.page-hero {
+  padding-top: 68px;
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+}
+.ph-left {
+  background: var(--ink);
+  padding: 80px 64px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+/* Decorative circles */
+.ph-circle {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+.ph-c1 { width:400px; height:400px; top:-100px; right:-100px; }
+.ph-c2 { width:250px; height:250px; bottom:-50px; left:-50px; }
+.ph-c3 { width:160px; height:160px; top:40%; left:40%; }
+
+.ph-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; color: rgba(255,255,255,0.35);
+  margin-bottom: 32px;
+}
+.ph-breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color .2s; }
+.ph-breadcrumb a:hover { color: white; }
+.ph-breadcrumb span { color: var(--sun); }
+
+.ph-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,107,53,0.15);
+  border: 1px solid rgba(255,107,53,0.3);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: 0.75rem; font-weight: 700; color: var(--sun);
+  margin-bottom: 24px; width: fit-content;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.ph-left h1 {
+  font-family: 'Nunito','Noto Sans TC',sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 900; color: white;
+  line-height: 1.2; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.ph-left h1 em { font-style: normal; color: var(--sun); }
+
+.ph-left p {
+  font-size: 1rem; color: rgba(255,255,255,0.55);
+  line-height: 1.85; font-weight: 300; max-width: 460px;
+  margin-bottom: 40px;
+}
+
+.ph-investor-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--sun); color: white;
+  border: none; border-radius: 99px;
+  padding: 14px 28px;
+  font-family: 'Noto Sans TC',sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: all .25s;
+  box-shadow: 0 6px 24px rgba(255,107,53,0.4);
+  width: fit-content;
+}
+.ph-investor-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,107,53,0.45); }
+
+.ph-right {
+  background: #f0ede8;
+  padding: 80px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 20px;
+}
+
+/* Market numbers */
+.market-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  display: flex; align-items: center; gap: 20px;
+  transition: transform .25s, box-shadow .25s;
+  animation: slideIn .6s ease both;
+}
+.market-card:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(0,0,0,0.10); }
+.mc-1 { animation-delay: .1s; }
+.mc-2 { animation-delay: .25s; }
+.mc-3 { animation-delay: .4s; }
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(30px); }
+  to { opacity:1; transform:translateX(0); }
+}
+.mc-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.mc-sun { background: rgba(255,107,53,0.1); }
+.mc-sky { background: rgba(0,180,216,0.1); }
+.mc-leaf { background: rgba(45,198,83,0.1); }
+.mc-body {}
+.mc-num {
+  font-family: 'Nunito',sans-serif;
+  font-size: 1.6rem; font-weight: 900;
+  color: var(--ink); line-height: 1;
+}
+.mc-label { font-size: 0.8rem; color: var(--mid); margin-top: 3px; }
+.mc-sub { font-size: 0.72rem; color: var(--leaf); font-weight: 700; margin-top: 4px; }
+
+/* ══ MISSION ══ */
+.mission-section {
+  padding: 100px 40px;
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.mission-left {}
+.section-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--soft); border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: 0.75rem; font-weight: 700; color: var(--mid);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Nunito','Noto Sans TC',sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900; letter-spacing: -0.02em;
+  line-height: 1.25; margin-bottom: 20px;
+}
+.mission-text {
+  font-size: 0.95rem; color: var(--mid);
+  line-height: 1.9; font-weight: 300;
+  margin-bottom: 16px;
+}
+.mission-text strong { color: var(--ink); font-weight: 700; }
+
+.mission-right {
+  position: relative;
+}
+.mission-big-num {
+  font-family: 'Nunito',sans-serif;
+  font-size: 10rem; font-weight: 900;
+  color: rgba(255,107,53,0.07);
+  line-height: 1; position: absolute;
+  top: -40px; left: -20px; pointer-events: none;
+  user-select: none;
+}
+.problem-cards { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.prob-card {
+  background: white; border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  display: flex; align-items: flex-start; gap: 16px;
+  border-left: 4px solid transparent;
+  transition: all .25s;
+}
+.prob-card:hover { transform: translateX(4px); }
+.prob-card-1 { border-left-color: var(--sun); }
+.prob-card-2 { border-left-color: var(--sky); }
+.prob-card-3 { border-left-color: var(--leaf); }
+.prob-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.prob-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+.prob-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.6; font-weight: 300; }
+
+/* ══ TIMELINE ══ */
+.timeline-section {
+  background: white;
+  padding: 96px 40px;
+}
+.timeline-inner { max-width: 900px; margin: 0 auto; }
+.timeline { margin-top: 56px; position: relative; padding-left: 40px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 16px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sun), var(--sky), var(--leaf), var(--lemon));
+  border-radius: 99px;
+}
+.tl-item {
+  position: relative; margin-bottom: 48px;
+  animation: fadeUp .6s ease both;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -32px; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex; align-items: center; justify-content: center;
+}
+.tl-year {
+  display: inline-block;
+  font-family: 'Nunito',sans-serif;
+  font-size: 0.78rem; font-weight: 900;
+  padding: 3px 12px; border-radius: 99px;
+  margin-bottom: 10px; letter-spacing: 0.06em;
+}
+.tl-title { font-family: 'Nunito','Noto Sans TC',sans-serif; font-size: 1.1rem; font-weight: 900; margin-bottom: 8px; }
+.tl-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.75; font-weight: 300; max-width: 560px; }
+
+/* ══ TEAM ══ */
+.team-section { padding: 96px 40px; max-width: 1100px; margin: 0 auto; }
+.team-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 56px;
+}
+.team-card {
+  background: white; border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  text-align: center;
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.team-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-color, var(--sun));
+  transform: scaleX(0); transition: transform .3s;
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+.team-card:hover::after { transform: scaleX(1); }
+.tc-1 { --card-color: var(--sun); }
+.tc-2 { --card-color: var(--sky); }
+.tc-3 { --card-color: var(--leaf); }
+.tc-4 { --card-color: var(--lemon); }
+.tc-5 { --card-color: #a855f7; }
+.tc-6 { --card-color: var(--sun); }
+
+.team-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; position: relative;
+}
+.ta-1 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.ta-2 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+.ta-3 { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+.ta-4 { background: linear-gradient(135deg, #ffecd2, #ffd166); }
+.ta-5 { background: linear-gradient(135deg, #e8c0ff, #c2a8f8); }
+.ta-6 { background: linear-gradient(135deg, #fcb69f, #ff9a8b); }
+
+.team-name { font-family: 'Nunito','Noto Sans TC',sans-serif; font-size: 1.05rem; font-weight: 900; margin-bottom: 4px; }
+.team-role { font-size: 0.78rem; color: var(--card-color); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
+.team-bio { font-size: 0.82rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+/* ══ MARKET OPPORTUNITY ══ */
+.market-section {
+  background: var(--ink);
+  padding: 96px 40px;
+}
+.market-inner { max-width: 1100px; margin: 0 auto; }
+.market-section .section-chip { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.12); color:rgba(255,255,255,0.45); }
+.market-section .section-title { color: white; }
+
+.market-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 16px; margin-top: 56px;
+}
+.mkt-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: background .25s;
+}
+.mkt-card:hover { background: rgba(255,255,255,0.07); }
+.mkt-num {
+  font-family: 'Nunito',sans-serif;
+  font-size: 2.8rem; font-weight: 900;
+  line-height: 1; margin-bottom: 8px;
+}
+.mkt-label { font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 500; margin-bottom: 10px; }
+.mkt-desc { font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.7; font-weight: 300; }
+.mkt-bar { height: 4px; border-radius: 99px; background: rgba(255,255,255,0.08); margin-top: 20px; overflow: hidden; }
+.mkt-bar-fill { height: 100%; border-radius: 99px; transition: width 1.5s ease; width: 0; }
+
+/* ══ VALUES ══ */
+.values-section { padding: 96px 40px; max-width: 1100px; margin: 0 auto; }
+.values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 56px; }
+.value-card {
+  background: white; border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  transition: transform .25s;
+  text-align: center;
+}
+.value-card:hover { transform: translateY(-4px); }
+.value-emoji { font-size: 2rem; margin-bottom: 14px; }
+.value-name { font-family: 'Nunito','Noto Sans TC',sans-serif; font-size: 1rem; font-weight: 900; margin-bottom: 8px; }
+.value-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+/* ══ INVESTOR CTA ══ */
+.investor-cta {
+  margin: 0 40px 80px;
+  background: linear-gradient(135deg, #fff8f5 0%, #fff3ee 100%);
+  border: 2px solid rgba(255,107,53,0.15);
+  border-radius: 24px;
+  padding: 64px 56px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 48px; align-items: center;
+  max-width: 1060px; margin: 0 auto 80px;
+}
+.ic-left h2 {
+  font-family: 'Nunito','Noto Sans TC',sans-serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 900; letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.ic-left h2 em { font-style: normal; color: var(--sun); }
+.ic-left p { font-size: 0.9rem; color: var(--mid); line-height: 1.8; max-width: 480px; }
+.ic-btns { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+.btn-investor {
+  padding: 14px 32px; background: var(--sun); color: white;
+  border: none; border-radius: 99px;
+  font-family: 'Noto Sans TC',sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: all .25s;
+  box-shadow: 0 6px 24px rgba(255,107,53,0.35);
+  white-space: nowrap;
+}
+.btn-investor:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,107,53,0.4); }
+.btn-deck {
+  padding: 13px 32px; background: transparent; color: var(--ink);
+  border: 1.5px solid rgba(0,0,0,0.15); border-radius: 99px;
+  font-family: 'Noto Sans TC',sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; transition: all .25s;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-deck:hover { border-color: var(--ink); }
+
+/* ══ SHARED FOOTER ══ */
+footer { background: var(--ink); padding: 64px 40px 32px; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+.footer-brand .logo-text { color: white; }
+.footer-brand .logo-text span { color: var(--sun); }
+.footer-tagline { color:rgba(255,255,255,0.4); font-size:0.85rem; line-height:1.8; margin-top:14px; max-width:260px; font-weight:300; }
+.footer-col h4 { font-size:0.8rem; font-weight:700; color:white; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.85rem; transition:color .2s; }
+.footer-col ul a:hover { color:white; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; display:flex; justify-content:space-between; align-items:center; }
+.footer-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.25); }
+.footer-tags { display:flex; gap:8px; }
+.footer-tag { padding:4px 12px; border-radius:99px; font-size:0.7rem; font-weight:700; border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.3); }
+
+/* Scroll reveal */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media (max-width:900px) {
+  .page-hero { grid-template-columns:1fr; }
+  .mission-section { grid-template-columns:1fr; gap:40px; }
+  .team-grid { grid-template-columns:1fr 1fr; }
+  .values-grid { grid-template-columns:1fr 1fr; }
+  .market-grid { grid-template-columns:1fr; }
+  .investor-cta { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="logo" href="homepage.html">
+    <div class="logo-icon">📢</div>
+    <div class="logo-text">牆<span>播</span></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="homepage.html">首頁</a>
+    <a class="nav-link active" href="#">關於我們</a>
+    <a class="nav-link" href="#">如何運作</a>
+    <a class="nav-link" href="#">費率</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-login">登入</button>
+    <button class="btn-cta">免費刊登</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<div class="page-hero">
+  <div class="ph-left">
+    <div class="ph-circle ph-c1"></div>
+    <div class="ph-circle ph-c2"></div>
+    <div class="ph-circle ph-c3"></div>
+
+    <div class="ph-breadcrumb">
+      <a href="homepage.html">首頁</a> › <span>關於我們</span>
+    </div>
+
+    <div class="ph-tag">🏢 關於牆播</div>
+
+    <h1>我們相信，<br>每一面<em>外牆</em><br>都有它的價值</h1>
+
+    <p>台灣有超過 20 萬棟透天厝與商業大樓，擁有可供出租的外牆空間，卻因為資訊不對稱，大多數屋主不知道如何變現，廣告主也找不到合適的位置。<br><br>牆播就是為了解決這個問題而生。</p>
+
+    <button class="ph-investor-btn">📊 查看投資簡報</button>
+  </div>
+
+  <div class="ph-right">
+    <div class="market-card mc-1">
+      <div class="mc-icon mc-sun">🏢</div>
+      <div class="mc-body">
+        <div class="mc-num">20萬+</div>
+        <div class="mc-label">台灣可供出租的外牆空間</div>
+        <div class="mc-sub">↑ 目前開發率不到 3%</div>
+      </div>
+    </div>
+    <div class="market-card mc-2">
+      <div class="mc-icon mc-sky">💰</div>
+      <div class="mc-body">
+        <div class="mc-num">NT$50–70億</div>
+        <div class="mc-label">台灣數位戶外廣告(DOOH)年產值</div>
+        <div class="mc-sub">↑ 年均成長約 6%</div>
+      </div>
+    </div>
+    <div class="market-card mc-3">
+      <div class="mc-icon mc-leaf">🎯</div>
+      <div class="mc-body">
+        <div class="mc-num">NT$15–20億</div>
+        <div class="mc-label">我們的目標市場規模（SAM）</div>
+        <div class="mc-sub">↑ 五年可達目標</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MISSION ══ -->
+<section class="mission-section">
+  <div class="mission-left reveal">
+    <div class="section-chip">💡 我們的使命</div>
+    <div class="section-title">解決廣告媒合的<br>三個老問題</div>
+    <p class="mission-text">台灣的戶外廣告市場長期依賴<strong>人脈與口耳相傳</strong>，屋主不知道自己的外牆值多少錢，廣告主找牆面要靠認識的人，廣告媒合的流程繁瑣、缺乏透明度。</p>
+    <p class="mission-text">我們用<strong>科技與平台化思維</strong>，把整個流程數位化、透明化，讓屋主與廣告主都能在同一個平台上完成媒合，效率提升 10 倍，成本降低 60%。</p>
+  </div>
+  <div class="mission-right reveal">
+    <div class="mission-big-num">3</div>
+    <div class="problem-cards">
+      <div class="prob-card prob-card-1">
+        <div class="prob-icon">😤</div>
+        <div>
+          <div class="prob-title">屋主不知道外牆能賺錢</div>
+          <div class="prob-desc">缺乏管道刊登，就算想出租也不知道從何開始，定價更是一頭霧水。</div>
+        </div>
+      </div>
+      <div class="prob-card prob-card-2">
+        <div class="prob-icon">🔍</div>
+        <div>
+          <div class="prob-title">廣告主找牆靠關係</div>
+          <div class="prob-desc">沒有集中平台，廣告主只能靠認識的人介紹，無法系統性比較地點與費率。</div>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<div class="timeline-section">
+  <div class="timeline-inner">
+    <div class="reveal">
+      <div class="section-chip">📅 發展歷程</div>
+      <div class="section-title">從一個想法，<br>到真正的平台</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--sun)"></div>
+        <div class="tl-year" style="background:rgba(255,107,53,0.1);color:var(--sun)">2023 Q3</div>
+        <div class="tl-title">發現問題，開始研究</div>
+        <div class="tl-desc">創辦人因為家中外牆想出租，發現市場上完全沒有合適的平台，開始深度訪談屋主、廣告主與仲介，確認痛點真實存在。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--sky)"></div>
+        <div class="tl-year" style="background:rgba(0,180,216,0.1);color:var(--sky)">2024 Q1</div>
+        <div class="tl-title">第一版原型上線，收集回饋</div>
+        <div class="tl-desc">推出最小可行產品（MVP），在台北信義區測試 30 組屋主與廣告主，媒合成功率達 67%，平均媒合時間 6 天。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--leaf)"></div>
+        <div class="tl-year" style="background:rgba(45,198,83,0.1);color:var(--leaf)">2024 Q3</div>
+        <div class="tl-title">加入 AI 審核，擴展到三個城市</div>
+        <div class="tl-desc">導入 AI 自動審核系統，審核時間從 2 天縮短至 5 分鐘，正式擴展到台北、台中、高雄三大城市，上架牆面突破 500 筆。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--lemon)"></div>
+        <div class="tl-year" style="background:rgba(255,209,102,0.15);color:#8a6500">2025（目標）</div>
+        <div class="tl-title">全台 22 縣市，啟動 A 輪募資</div>
+        <div class="tl-desc">計畫覆蓋全台所有縣市，上架牆面達 5,000 筆，啟動 A 輪募資，引進策略性投資人加速成長。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TEAM ══ -->
+<section class="team-section">
+  <div class="reveal" style="text-align:center">
+    <div class="section-chip">👥 核心團隊</div>
+    <div class="section-title">由各領域專家組成</div>
+    <p style="font-size:0.95rem;color:var(--mid);max-width:480px;margin:12px auto 0;line-height:1.8;font-weight:300">我們相信，好的產品需要好的人才。每位核心成員都在各自領域有 10 年以上的實戰經驗。</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card tc-1 reveal">
+      <div class="team-avatar ta-1">👩‍💼</div>
+      <div class="team-name">林○○</div>
+      <div class="team-role">創辦人 ／ CEO</div>
+      <p class="team-bio">前 591 租屋網產品總監，10 年房地產科技經驗，主導過多個百萬用戶級產品。</p>
+    </div>
+    <div class="team-card tc-2 reveal">
+      <div class="team-avatar ta-2">👨‍💻</div>
+      <div class="team-name">陳○○</div>
+      <div class="team-role">技術長 ／ CTO</div>
+      <p class="team-bio">前台積電 AI 工程師，專精機器學習與平台架構，負責 AI 審核系統研發。</p>
+    </div>
+    <div class="team-card tc-3 reveal">
+      <div class="team-avatar ta-3">👩‍🎨</div>
+      <div class="team-name">王○○</div>
+      <div class="team-role">設計長 ／ CPO</div>
+      <p class="team-bio">前 Gogoro 資深產品設計師，操刀過多個獲獎行動應用，主導牆播全平台體驗設計。</p>
+    </div>
+    <div class="team-card tc-4 reveal">
+      <div class="team-avatar ta-4">👨‍💼</div>
+      <div class="team-name">張○○</div>
+      <div class="team-role">營運長 ／ COO</div>
+      <p class="team-bio">前廣告代理商媒體總監，深耕戶外廣告 12 年，擁有業界最廣泛的廣告主資源。</p>
+    </div>
+    <div class="team-card tc-5 reveal">
+      <div class="team-avatar ta-5">👩‍⚖️</div>
+      <div class="team-name">黃○○</div>
+      <div class="team-role">法務長 ／ CLO</div>
+      <p class="team-bio">執業律師，專精房地產與廣告法規，確保平台所有交易合法合規。</p>
+    </div>
+    <div class="team-card tc-6 reveal">
+      <div class="team-avatar ta-6">👨‍📈</div>
+      <div class="team-name">吳○○</div>
+      <div class="team-role">財務長 ／ CFO</div>
+      <p class="team-bio">前創投基金分析師，協助多家新創完成 A、B 輪募資，負責財務規劃與投資人關係。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARKET OPPORTUNITY ══ -->
+<div class="market-section">
+  <div class="market-inner">
+    <div class="reveal">
+      <div class="section-chip">📈 市場機會</div>
+      <div class="section-title" style="color:white">為什麼現在？<br>為什麼是我們？</div>
+    </div>
+    <div class="market-grid">
+      <div class="mkt-card reveal">
+        <div class="mkt-num" style="color:var(--sun)">NT$50–70億</div>
+        <div class="mkt-label">TAM — 台灣戶外廣告總市場</div>
+        <div class="mkt-desc">台灣戶外廣告市場年產值持續成長，數位化轉型帶動新需求，傳統看板逐漸被彈性租賃取代。</div>
+        <div class="mkt-bar"><div class="mkt-bar-fill" data-width="100%" style="background:var(--sun)"></div></div>
+      </div>
+      <div class="mkt-card reveal">
+        <div class="mkt-num" style="color:var(--sky)">NT$15–20億</div>
+        <div class="mkt-label">SAM — 可服務的市場規模</div>
+        <div class="mkt-desc">聚焦在可數位化媒合的中小型外牆廣告空間，這是傳統代理商忽略的長尾市場。</div>
+        <div class="mkt-bar"><div class="mkt-bar-fill" data-width="25%" style="background:var(--sky)"></div></div>
+      </div>
+      <div class="mkt-card reveal">
+        <div class="mkt-num" style="color:var(--leaf)">NT$3億</div>
+        <div class="mkt-label">SOM — 五年目標佔有市場</div>
+        <div class="mkt-desc">第五年達到 5 億年交易額，以 15% 平台抽成計算，年營收目標達 7,500 萬元。</div>
+        <div class="mkt-bar"><div class="mkt-bar-fill" data-width="4%" style="background:var(--leaf)"></div></div>
+      </div>
+      <div class="mkt-card reveal">
+        <div class="mkt-num" style="color:var(--lemon)">6%</div>
+        <div class="mkt-label">年複合成長率（CAGR）</div>
+        <div class="mkt-desc">台灣戶外廣告市場持續以每年 6% 速度成長，疫情後實體廣告需求顯著回升。</div>
+        <div class="mkt-bar"><div class="mkt-bar-fill" data-width="60%" style="background:var(--lemon)"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VALUES ══ -->
+<section class="values-section">
+  <div class="reveal" style="text-align:center">
+    <div class="section-chip">🌟 核心價值</div>
+    <div class="section-title">我們相信的事</div>
+  </div>
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <div class="value-emoji">🤝</div>
+      <div class="value-name">雙方共贏</div>
+      <p class="value-desc">屋主、廣告主、仲介都能在平台上找到最大價值，沒有人被剝削。</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-emoji">🔍</div>
+      <div class="value-name">資訊透明</div>
+      <p class="value-desc">定價、流量數據、合約條件全部公開，讓每一筆交易都有憑有據。</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-emoji">⚡</div>
+      <div class="value-name">效率至上</div>
+      <p class="value-desc">用科技取代繁瑣的人工流程，從刊登到收款，每個步驟都要快 10 倍。</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-emoji">🛡</div>
+      <div class="value-name">安全保障</div>
+      <p class="value-desc">平台代管資金、提供合約範本、AI 審核把關，讓每一方都能放心交易。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INVESTOR CTA ══ -->
+<div style="padding:0 40px 80px; max-width:1140px; margin:0 auto;">
+  <div class="investor-cta reveal">
+    <div class="ic-left">
+      <h2>對<em>投資牆播</em>有興趣？<br>我們很樂意深入介紹</h2>
+      <p>目前正在進行種子輪募資，尋找認同我們理念、願意一起改變台灣廣告市場的策略性投資人。歡迎預約一對一簡報，或直接下載投資人簡報。</p>
+    </div>
+    <div class="ic-btns">
+      <button class="btn-investor">📅 預約投資人簡報</button>
+      <button class="btn-deck">📄 下載投資簡報 PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="homepage.html">
+        <div class="logo-icon">📢</div>
+        <div class="logo-text">牆<span>播</span></div>
+      </a>
+      <p class="footer-tagline">台灣首家外牆廣告媒合平台，連結屋主與廣告主，打造高效的廣告媒合生態系。</p>
+    </div>
+    <div class="footer-col">
+      <h4>服務</h4>
+      <ul>
+        <li><a href="#">刊登外牆</a></li>
+        <li><a href="#">搜尋牆面</a></li>
+        <li><a href="#">成為仲介</a></li>
+        <li><a href="#">費率說明</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>關於</h4>
+      <ul>
+        <li><a href="#">公司介紹</a></li>
+        <li><a href="#">媒體報導</a></li>
+        <li><a href="#">聯絡我們</a></li>
+        <li><a href="#">合作洽談</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>支援</h4>
+      <ul>
+        <li><a href="#">常見問題</a></li>
+        <li><a href="#">服務條款</a></li>
+        <li><a href="#">隱私政策</a></li>
+        <li><a href="#">使用教學</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 牆播 WallCast. 版權所有</p>
+    <div class="footer-tags">
+      <span class="footer-tag">台灣製造</span>
+      <span class="footer-tag">外牆廣告</span>
+      <span class="footer-tag">廣告媒合</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Market bar animation
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.mkt-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width;
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.market-grid').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
